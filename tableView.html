@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TableView</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('https://images.pexels.com/photos/533769/pexels-photo-533769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); /* Replace 'background_image.jpg' with your image file */
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+    }
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8); /* White background with opacity */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    select, button {
+        padding: 10px;
+        margin-bottom: 10px;
+        width: calc(50% - 15px);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>TableView</h2>
+    <form id="form">
+        <select id="placeSelect" name="place">
+            <option value="Delhi">Delhi</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Chennai">Chennai</option>
+        </select>
+        <select id="budgetSelect" name="budget">
+            <option value="5000">5000</option>
+            <option value="10000">10000</option>
+            <option value="15000">15000</option>
+        </select>
+        <button type="button" id="goButton">Go</button>
+    </form>
+    <table id="resultTable">
+        <thead>
+            <tr>
+                <th>Place</th>
+                <th>Budget</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table content will be added dynamically -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById('goButton').addEventListener('click', function() {
+        var place = document.getElementById('placeSelect').value;
+        var budget = parseInt(document.getElementById('budgetSelect').value);
+
+        var data = [];
+        if (place === 'Delhi') {
+            if (budget >= 15000) {
+                data.push(['Qutub Minar', 1500]);
+                data.push(['Humayuns Tomb', 1500]);
+                data.push(['Lotus Temple', 2000]);
+                data.push(['India Gate', 1500]);
+                data.push(['Agrasen Ki Baoli', 1500]);
+                data.push(['Indira Gandhi Museum', 2000]);
+            } else if (budget >= 10000) {
+                data.push(['Qutub Minar', 1500]);
+                data.push(['Humayuns Tomb', 1500]);
+                data.push(['Lotus Temple', 2000]);
+                data.push(['India Gate', 1500]);
+                data.push(['Indira Gandhi Museum', 2000]);
+            } else if (budget >= 5000) {
+                data.push(['Qutub Minar', 1500]);
+                data.push(['Humayuns Tomb', 1500]);
+                data.push(['Lotus Temple', 2000]);
+                data.push(['Indira Gandhi Museum', 2000]);
+            }
+        } else if (place === 'Himachal Pradesh') {
+            if (budget >= 15000) {
+                data.push(['Manali', 7500]);
+                data.push(['Shimla', 2500]);
+                data.push(['Kullu', 5000]);
+            } else if (budget >= 10000) {
+                data.push(['Shimla', 5000]);
+                data.push(['Kullu', 5000]);
+            } else if (budget >= 5000) {
+                data.push(['Kullu', 2000]);
+            }
+        }
+
+        var tableBody = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = '';
+        data.forEach(function(row) {
+            var newRow = tableBody.insertRow();
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            cell1.textContent = row[0];
+            cell2.textContent = row[1];
+
+            // Add link to Google Maps
+            cell1.innerHTML = '<a href="https://www.google.com/maps/search/?api=1&query=' + row[0] + '">' + row[0] + '</a>';
+        });
+    });
+</script>
+</body>
+</html>
